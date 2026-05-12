@@ -1,7 +1,4 @@
 #pragma once
-#include <cstdint>
-#include <iostream>
-
 #include "Types.h"
 #include "Memory.h"
 
@@ -26,16 +23,16 @@ struct CPU
     }
 
     void reset(Memory& mem); //Reset function
-    static void consumeCycle(u32& cycles);
+    static void consumeCycle(int32& cycles);
 
-    Byte fetchByte(const Memory& mem, u32& cycles); //Fetches byte from memory
-    static Byte readByte(const Memory& mem, u32& cycles, Word address); //Fetches byte at specific address
-    static void writeByte(Memory& mem, u32& cycles, Word address, Byte value);
+    Byte fetchByte(const Memory& mem, int32& cycles); //Fetches byte from memory
+    static Byte readByte(const Memory& mem, int32& cycles, Word address); //Fetches byte at specific address
+    static void writeByte(Memory& mem, int32& cycles, Word address, Byte value);
 
-    Word fetchWord(const Memory& mem, u32& cycles); //Fetches word from memory
-    static Word readWord(const Memory& mem, u32& cycles, Word address); //Fetches word at specific address
-    static Word readWordPageWrap(const Memory& mem, u32& cycles, Word address);
+    Word fetchWord(const Memory& mem, int32& cycles); //Fetches word from memory
+    static Word readWord(const Memory& mem, int32& cycles, Word address); //Fetches word at specific address
+    static Word readWordPageWrap(const Memory& mem, int32& cycles, Word address);
 
-    void execute(Memory& mem, u32 cycles); //Executes instruction based on opcode
+    void execute(Memory& mem, int32 cycles); //Executes instruction based on opcode
 
 };

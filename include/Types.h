@@ -4,7 +4,7 @@
 // Standard NES types
 using Byte = uint8_t;   // 8-bit
 using Word = uint16_t;  // 16-bit
-using u32  = uint32_t;  // 32-bit
+using int32  = int32_t;  // 32-bit
 
 namespace Instructions {
     enum Opcode : Byte {

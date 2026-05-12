@@ -13,12 +13,11 @@ add_executable(nes main.cpp
         include/Types.h
         src/Instructions/Instructions.h
         src/Instructions/LDA.cpp
-        src/Instructions/Instructions.cpp
         src/Instructions/LDX.cpp
         src/Instructions/LDY.cpp
         src/Instructions/STA.cpp
         src/Instructions/STX.cpp
         src/Instructions/STY.cpp
         src/Instructions/Transfer.cpp
-        src/Instructions/Transfer.cpp
-        src/Instructions/Stack.cpp)
+        src/Instructions/Stack.cpp
+        src/Instructions/Instructions.cpp)
