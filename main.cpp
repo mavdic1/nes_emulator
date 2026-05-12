@@ -1,18 +1,29 @@
 #include <iostream>
+#include "include/Types.h"
+#include "include/Memory.h"
+#include "include/CPU.h"
+#include "src/Instructions/Instructions.h"
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main()
 {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    CPU cpu{};
+    Memory mem;
 
-    for (int i = 1; i <= 5; i++)
-    {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
-    }
+    mem.Initialize();
+    Instructions::InitializeTable();
+
+    //Inline test code - Start
+
+    mem[0x8000] = Instructions::LDA_IMM;
+    mem[0x8001] = 0x42;
+
+    mem[0xFFFC] = 0x00; // Low byte
+    mem[0xFFFD] = 0x80; // High byte (0x8000)
+
+    //Inline test code - End
+
+    cpu.reset(mem);
+    cpu.execute(mem, 3);
 
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }
