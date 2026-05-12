@@ -11,13 +11,13 @@ namespace Instructions {
     void RegisterSTY() {
         // STY Zero Page
         table[STY_ZP] = [](CPU& cpu, Memory& mem, u32& cycles) {
-            Byte address = cpu.fetchByte(mem, cycles);
+            Word address = cpu.fetchByte(mem, cycles);
             STY_Execute(mem, cpu, cycles,address);
         };
 
         // STY Zero Page X
         table[STY_ZPX] = [](CPU& cpu, Memory& mem, u32& cycles) {
-            Byte address = addrZPX(cpu, mem, cycles);
+            Word address = addrZPX(cpu, mem, cycles);
             STY_Execute(mem, cpu, cycles,address);
         };
 

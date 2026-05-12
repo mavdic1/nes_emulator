@@ -11,13 +11,13 @@ namespace Instructions {
     void RegisterSTX() {
         // STX Zero Page
         table[STX_ZP] = [](CPU& cpu, Memory& mem, u32& cycles) {
-            Byte address = cpu.fetchByte(mem, cycles);
+            Word address = cpu.fetchByte(mem, cycles);
             STX_Execute(mem, cpu, cycles,address);
         };
 
         // STX Zero Page Y
         table[STX_ZPY] = [](CPU& cpu, Memory& mem, u32& cycles) {
-            Byte address = addrZPY(cpu, mem, cycles);
+            Word address = addrZPY(cpu, mem, cycles);
             STX_Execute(mem, cpu, cycles,address);
         };
 

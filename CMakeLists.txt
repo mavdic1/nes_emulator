@@ -19,4 +19,6 @@ add_executable(nes main.cpp
         src/Instructions/STA.cpp
         src/Instructions/STX.cpp
         src/Instructions/STY.cpp
-        src/Instructions/Transfer.cpp)
+        src/Instructions/Transfer.cpp
+        src/Instructions/Transfer.cpp
+        src/Instructions/Stack.cpp)

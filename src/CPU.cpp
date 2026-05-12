@@ -59,6 +59,15 @@ Word CPU::readWord(const Memory& mem, u32& cycles, Word address) //Fetches word 
     return value;
 }
 
+Word CPU::readWordPageWrap(const Memory& mem, u32& cycles, Word address)
+{
+    Word lo = readByte(mem, cycles, address);
+    Word hiAddress = (address & 0xFF00) | ((address + 1) & 0x00FF);
+    Word hi = readByte(mem, cycles, hiAddress);
+
+    return (hi << 8) | lo;
+}
+
 void CPU::execute(Memory& mem, u32 cycles) //Execute
 {
     while (cycles > 0)

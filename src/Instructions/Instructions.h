@@ -98,6 +98,10 @@ namespace Instructions {
     void RegisterSTX();
     void RegisterSTY();
 
+    void RegisterTransfer();
+
+    void RegisterStack();
+
     inline void InitializeTable() {
         // Clear table
         for (auto& i : table) i = nullptr;
@@ -110,5 +114,9 @@ namespace Instructions {
         RegisterSTA();
         RegisterSTX();
         RegisterSTY();
+
+        RegisterTransfer();
+
+        RegisterStack();
     }
 }

@@ -34,6 +34,7 @@ struct CPU
 
     Word fetchWord(const Memory& mem, u32& cycles); //Fetches word from memory
     static Word readWord(const Memory& mem, u32& cycles, Word address); //Fetches word at specific address
+    static Word readWordPageWrap(const Memory& mem, u32& cycles, Word address);
 
     void execute(Memory& mem, u32 cycles); //Executes instruction based on opcode
 

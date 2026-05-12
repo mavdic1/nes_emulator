@@ -49,6 +49,20 @@ namespace Instructions {
         // STY - Store Y Register
         STY_ZP   = 0x84,
         STY_ZPX  = 0x94,
-        STY_ABS  = 0x8C
+        STY_ABS  = 0x8C,
+
+        //Transfer
+        TAX = 0xAA,
+        TAY = 0xA8,
+        TSX = 0xBA,
+        TXA = 0x8A,
+        TXS = 0x9A,
+        TYA = 0x98,
+
+        //Stack
+        PHA = 0x48,
+        PLA = 0x68,
+        PHP = 0x08,
+        PLP = 0x28,
     };
 }
