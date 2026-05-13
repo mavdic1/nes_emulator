@@ -14,7 +14,7 @@ void CPU::reset(Memory& mem) //Reset function
 
     A = X = Y = 0; //Registers reset to 0 for safety
 
-    P = I | U;
+    P = I | U; // Ensure Unused bit is 1 and Interrupts are disabled on start
 
 }
 
@@ -73,6 +73,9 @@ void CPU::execute(Memory& mem, int32 cycles) //Execute
 {
     while (cycles > 0)
     {
+        //Simple debugging logger
+        printf("PC: %04X | Op: %02X | A: %02X X: %02X Y: %02X S: %02X\n", PC, mem.Read(PC), A, X, Y, S);
+
         switch (const Byte opcode = fetchByte(mem, cycles)) {
             //LDA
             case Instructions::LDA_IMM: Instructions::LDA_IMM_func(*this,mem, cycles); break;

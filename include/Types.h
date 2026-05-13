@@ -5,6 +5,7 @@
 using Byte = uint8_t;   // 8-bit
 using Word = uint16_t;  // 16-bit
 using int32  = int32_t;  // 32-bit
+using SByte = int8_t;
 
 namespace Instructions {
     enum Opcode : Byte {
