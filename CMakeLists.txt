@@ -16,4 +16,15 @@ add_executable(nes main.cpp
         src/Instructions/Stack.cpp
         src/Instructions/Instructions.cpp
         src/Instructions/Load.cpp
-        src/Instructions/Store.cpp)
+        src/Instructions/Store.cpp
+        src/Instructions/Logic.cpp
+        src/Instructions/Compare.cpp
+        src/Instructions/Jump.cpp
+        include/Bus.h
+        src/Bus.cpp
+        src/Instructions/Branch.cpp
+        src/Instructions/IncDec.cpp
+        src/Instructions/StatusFlag.cpp
+        src/Instructions/System.cpp
+        src/Instructions/Bitwise.cpp
+        src/Instructions/Arithmetic.cpp)

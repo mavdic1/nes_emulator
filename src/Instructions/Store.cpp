@@ -3,102 +3,44 @@
 
 namespace Instructions {
     // Internal helper
-    static void Store_Execute(Memory &mem, const CPU &cpu, int32 &cycles, Word address, const Byte& reg) {
-        CPU::writeByte(mem, cycles, address, reg);
+    static void Store_Execute(CPU& cpu, Bus& Bus, int32& cycles, Word address, const Byte& reg) {
+        CPU::writeByte(Bus, cycles, address, reg);
     }
 
-    /*
-     * S
-     * T
-     * A
-     */
-
-    // STA Zero Page
-    void STA_ZP_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Byte address = cpu.fetchByte(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
+    void STA(CPU& cpu, Bus& Bus, int32& cycles, const AddrMode mode) {
+        Word address;
+        switch (mode) {
+            case AddrMode::ZP:   address = addrZP(cpu, Bus, cycles); break;
+            case AddrMode::ZPX:  address = addrZPX(cpu, Bus, cycles); break;
+            case AddrMode::ABS:  address = addrABS(cpu, Bus, cycles); break;
+            case AddrMode::ABSX: address = addrABSX(cpu, Bus, cycles, true); break;
+            case AddrMode::ABSY: address = addrABSY(cpu, Bus, cycles, true); break;
+            case AddrMode::INDX: address = addrINDX(cpu, Bus, cycles); break;
+            case AddrMode::INDY: address = addrINDY(cpu, Bus, cycles, true); break;
+            default: return;
+        }
+        Store_Execute(cpu, Bus, cycles, address, cpu.A);
     }
 
-    // STA Zero Page X
-    void STA_ZPX_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Byte address = addrZPX(cpu, mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
+    void STX(CPU& cpu, Bus& Bus, int32& cycles, const AddrMode mode) {
+        Word address;
+        switch (mode) {
+            case AddrMode::ZP:   address = addrZP(cpu, Bus, cycles); break;
+            case AddrMode::ZPY:  address = addrZPY(cpu, Bus, cycles); break;
+            case AddrMode::ABS:  address = addrABS(cpu, Bus, cycles); break;
+            default: return;
+        }
+        Store_Execute(cpu, Bus, cycles, address, cpu.X);
     }
 
-    // STA Absolute
-    void STA_ABS_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = cpu.fetchWord(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
-    }
-
-    // STA Absolute,X
-    void STA_ABSX_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrABSX(cpu, mem, cycles, true);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
-    }
-
-    // STA Absolute,Y
-    void STA_ABSY_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrABSY(cpu, mem, cycles, true);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
-    }
-
-    // STA Indirect,X
-    void STA_INDX_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrINDX(cpu, mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
-    }
-
-    // STA Indirect,Y
-    void STA_INDY_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrINDY(cpu, mem, cycles, true);
-        Store_Execute(mem, cpu, cycles, address, cpu.A);
-    }
-
-    /*
-     * S
-     * T
-     * X
-     */
-
-    // STX Zero Page
-    void STX_ZP_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = cpu.fetchByte(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.X);
-    }
-
-    // STX Zero Page Y
-    void STX_ZPY_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrZPY(cpu, mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.X);
-    }
-
-    // STX Absolute
-    void STX_ABS_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = cpu.fetchWord(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.X);
-    }
-
-    /*
-     * S
-     * T
-     * Y
-     */
-    
-    void STY_ZP_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = cpu.fetchByte(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.Y);
-    }
-
-    // STY Zero Page X
-    void STY_ZPX_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = addrZPX(cpu, mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.Y);
-    }
-
-    // STY Absolute
-    void STY_ABS_func(CPU &cpu, Memory &mem, int32 &cycles) {
-        Word address = cpu.fetchWord(mem, cycles);
-        Store_Execute(mem, cpu, cycles, address, cpu.Y);
+    void STY(CPU& cpu, Bus& Bus, int32& cycles, const AddrMode mode) {
+        Word address;
+        switch (mode) {
+            case AddrMode::ZP:   address = addrZP(cpu, Bus, cycles); break;
+            case AddrMode::ZPX:  address = addrZPX(cpu, Bus, cycles); break;
+            case AddrMode::ABS:  address = addrABS(cpu, Bus, cycles); break;
+            default: return;
+        }
+        Store_Execute(cpu, Bus, cycles, address, cpu.Y);
     }
 }

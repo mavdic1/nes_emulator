@@ -1,15 +1,22 @@
 #pragma once
 #include "Types.h"
-#include "Memory.h"
+#include "Bus.h"
+
+struct Bus;
 
 struct CPU
 {
-    Word PC; //Program Counter
+    Bus* bus = nullptr;
 
-    Byte S; //Stack
+    // Connect the CPU to a bus
+    void ConnectBus(Bus* nBus) { bus = nBus; }
 
-    Byte A,X,Y; //Registers
-    Byte P; //Status register
+    Word PC{}; //Program Counter
+
+    Byte S{}; //Stack
+
+    Byte A{},X{},Y{}; //Registers
+    Byte P{}; //Status register
 
     enum Flags
     {
@@ -22,17 +29,17 @@ struct CPU
         else P &= ~flag;
     }
 
-    void reset(Memory& mem); //Reset function
+    void reset(Bus& bus); //Reset function
     static void consumeCycle(int32& cycles);
 
-    Byte fetchByte(const Memory& mem, int32& cycles); //Fetches byte from memory
-    static Byte readByte(const Memory& mem, int32& cycles, Word address); //Fetches byte at specific address
-    static void writeByte(Memory& mem, int32& cycles, Word address, Byte value);
+    Byte fetchByte(const Bus& bus, int32& cycles); //Fetches byte from Bus
+    static Byte readByte(const Bus& bus, int32& cycles, Word address); //Fetches byte at specific address
+    static void writeByte(Bus& bus, int32& cycles, Word address, Byte value);
 
-    Word fetchWord(const Memory& mem, int32& cycles); //Fetches word from memory
-    static Word readWord(const Memory& mem, int32& cycles, Word address); //Fetches word at specific address
-    static Word readWordPageWrap(const Memory& mem, int32& cycles, Word address);
+    Word fetchWord(const Bus& bus, int32& cycles); //Fetches word from Bus
+    static Word readWord(const Bus& bus, int32& cycles, Word address); //Fetches word at specific address
+    static Word readWordPageWrap(const Bus& bus, int32& cycles, Word address);
 
-    void execute(Memory& mem, int32 cycles); //Executes instruction based on opcode
+    void execute(Bus& bus, int32 cycles); //Executes instruction based on opcode
 
 };

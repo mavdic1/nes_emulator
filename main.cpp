@@ -2,12 +2,12 @@
 #include "include/Types.h"
 #include "include/Memory.h"
 #include "include/CPU.h"
-#include "src/Instructions/Instructions.h"
 
 int main()
 {
     CPU cpu{};
     Memory mem{};
+    Bus bus{};
 
     mem.Initialize();
 
@@ -21,8 +21,8 @@ int main()
 
     //Inline test code - End
 
-    cpu.reset(mem);
-    cpu.execute(mem, 2);
+    cpu.reset(bus);
+    cpu.execute(bus, 2);
 
     return 0;
 }
